@@ -45,59 +45,17 @@ public class MainActivity extends AppCompatActivity {
                             REQUEST_WRITE_STORAGE);
                 }
             }
-
+        } else {
+            //if (!helpers.directoryExists("/")) {
+                //helpers.makeDirectory("/");
+                //helpers.makeDirectory("/data");
+                //helpers.makeDirectory("/tmp");
+            //}
+            //helpers.deleteAllFilesInDirectory("/tmp/");*/
         }
     }
 
-    /*private boolean checkForMusicAndInitialize(){
-        boolean hasPermission = (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
-
-        if (!hasPermission) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    REQUEST_WRITE_STORAGE);
-
-            return false;
-        } else {
-            if (!helpers.baseDirectoryExists("VGMRipsPlayer")) {
-                helpers.baseMakeDirectory("VGMRipsPlayer/data");
-                helpers.baseMakeDirectory("VGMRipsPlayer/tmp");
-            }
-            helpers.deleteAllFilesInDirectory("VGMRipsPlayer/tmp/");
-        }
-        return true;
-    }*/
-
-    /*@Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case REQUEST_WRITE_STORAGE:
-                //if (grantResults.length > 0) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        boolean hasPermission = (ContextCompat.checkSelfPermission(this,
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
-                        if (hasPermission) {
-                            Log.d("fuck", "fuck");
-                            showMessageOKCancel("You need to allow access to the external storage",
-                                    new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-
-//                                            checkForMusicAndInitialize();
-                                        }
-                                    });
-                            return;
-                        }
-                    }
-
-                //}
-                break;
-        }
-    }*/
-
     private void displayNeverAskAgainDialog() {
-
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("VGMRipsPlayer requires access to the external storage to store downloaded VGM data. "
                 + "\n\nSince you did not allow it permanently you need to enable it in the Settings screen or reinstall VGMRipsPlayer.");
@@ -113,11 +71,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        //builder.setNegativeButton("Cancel", null);
         builder.show();
     }
-
-
+    
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[]
             grantResults) {
@@ -130,14 +86,4 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-
-    /*private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
-        new AlertDialog.Builder(MainActivity.this)
-                .setMessage(message)
-                .setPositiveButton("OK", okListener)
-                .setNegativeButton("Cancel", null)
-                .create()
-                .show();
-    }*/
 }
