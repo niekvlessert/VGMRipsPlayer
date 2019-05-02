@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">VGMRips Player</string>
+    <string name="permission_denied_contacts">Oh nooooooo</string>
 </resources>
