@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private SlidingUpPanelLayout mLayout;
 
     private static final int REQUEST_WRITE_STORAGE = 112;
+
     private static final String TAG = "VGMRipsPlayer";
 
     private HelperFunctions helpers;
@@ -29,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        helpers = new HelperFunctions();
+
         setContentView(R.layout.activity_main);
     }
 
@@ -46,12 +50,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         } else {
-            //if (!helpers.directoryExists("/")) {
-                //helpers.makeDirectory("/");
-                //helpers.makeDirectory("/data");
-                //helpers.makeDirectory("/tmp");
-            //}
-            //helpers.deleteAllFilesInDirectory("/tmp/");*/
+            if (!helpers.directoryExists("/")) {
+                helpers.makeDirectory("/");
+                helpers.makeDirectory("/data");
+                helpers.makeDirectory("/tmp");
+            }
+            helpers.deleteAllFilesInDirectory("/tmp/");
         }
     }
 
@@ -73,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         });
         builder.show();
     }
-    
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[]
             grantResults) {

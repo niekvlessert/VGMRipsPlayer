@@ -15,9 +15,9 @@ import java.util.zip.ZipInputStream;
 
 public class HelperFunctions {
 
-    private static final String LOG_TAG = "VGMRipsPlayer helpers";
+    private static final String LOG_TAG = "VGMRipsPlayer_helpers";
     private final static char[] hexArray = "0123456789ABCDEF".toCharArray();
-    private final static File baseDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS + "VGMRipsPlayer");
+    private final static File baseDirectory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/VGMRipsPlayer");
 
     public HelperFunctions() {}
 
@@ -67,7 +67,7 @@ public class HelperFunctions {
     }
 
     public File[] getAllFilesInDirectory(String directory){
-        File f = new File(baseDirectory + "/VGMRipsPlayer/" + directory);
+        File f = new File(baseDirectory + directory);
         return f.listFiles();
     }
 
@@ -139,7 +139,7 @@ public class HelperFunctions {
             byte[] buffer = new byte[8192];
             while ((ze = zis.getNextEntry()) != null) {
                 File file = new File(targetDirectory, ze.getName());
-                Log.d("VGMRipsPlayer", ze.getName());
+                Log.d(LOG_TAG, ze.getName());
                 File dir = ze.isDirectory() ? file : file.getParentFile();
                 if (!dir.isDirectory() && !dir.mkdirs())
                     throw new FileNotFoundException("Failed to ensure directory: " +
@@ -174,7 +174,7 @@ public class HelperFunctions {
             while ((ze = zis.getNextEntry()) != null) {
                 if (ze.toString().equals(fileToExtract)) {
                     File file = new File(targetDirectory, ze.getName());
-                    Log.d("VGMRipsPlayer", "match found!!: " + ze.getName());
+                    Log.d(LOG_TAG, "match found: " + ze.getName());
                     File dir = ze.isDirectory() ? file : file.getParentFile();
                     if (!dir.isDirectory() && !dir.mkdirs())
                         throw new FileNotFoundException("Failed to ensure directory: " +
@@ -193,9 +193,9 @@ public class HelperFunctions {
             if (time > 0)
                 file.setLastModified(time);
             */
-                } /*else {
+                } else {
                     Log.d("VGMRipsPlayer", "skipping: " + ze.toString());
-                }*/
+                }
             }
         } finally {
             zis.close();
