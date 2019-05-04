@@ -63,6 +63,7 @@ public class HelperFunctions {
     }
 
     public void deleteFile(String directory, String file) {
+        Log.d(LOG_TAG, "deleting file: " + baseDirectory + directory + "/" + file);
         new File(baseDirectory + directory + "/" + file).delete();
     }
 
